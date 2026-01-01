@@ -7,9 +7,9 @@ import { companyInfo } from "./components/companyinfo";
 const App = () => {
   const apiUrl = import.meta.env.VITE_API_URL;
   const [chatHistory, setChatHistory] = useState([{
-    hideInChat : true,
+    hideInChat: true,
     role: "model",
-    text : companyInfo
+    text: companyInfo
   }]);
   const [showChatbot, setShowChatbot] = useState(false);
   const chatBodyRef = useRef();
@@ -51,47 +51,52 @@ const App = () => {
   }, [chatHistory]);
 
   return (
-    <div className={`container ${showChatbot ? 'show-chatbot' : ""}`}>
+    <>
+    <div className="heading">
+      <h1 className="main-header1">Aroma Coffee Chatbot</h1>
+    </div>
+      <div className={`container ${showChatbot ? 'show-chatbot' : ""}`}>
 
-      <button onClick={() => setShowChatbot((prev) => !prev)} id="chatbot-toggler">
-        <span className="material-symbols-rounded">mode_comment</span>
-        <span className="material-symbols-rounded">close</span>
-      </button>
+        <button onClick={() => setShowChatbot((prev) => !prev)} id="chatbot-toggler">
+          <span className="material-symbols-rounded">mode_comment</span>
+          <span className="material-symbols-rounded">close</span>
+        </button>
 
-      <div className="chatbot-popup">
-        {/* chatbot header */}
-        <div className="chat-header">
-          <div className="header-info">
-            <Chatboticon />
-            <h2 className="logo-text">
-              Chatbot
-            </h2>
+        <div className="chatbot-popup">
+          {/* chatbot header */}
+          <div className="chat-header">
+            <div className="header-info">
+              <Chatboticon />
+              <h2 className="logo-text">
+                Chatbot
+              </h2>
+            </div>
+            <button onClick={() => setShowChatbot((prev) => !prev)} className="material-symbols-rounded">
+              keyboard_arrow_down
+            </button>
           </div>
-          <button onClick={() => setShowChatbot((prev) => !prev)} className="material-symbols-rounded">
-            keyboard_arrow_down
-          </button>
-        </div>
-        {/* Chatbot body */}
-        <div ref={chatBodyRef} className="chat-body">
-          <div className="message bot-message">
-            <Chatboticon />
-            <p className="message-text">
-              Hey there 🖐️ <br />How can I help you ?
-            </p>
+          {/* Chatbot body */}
+          <div ref={chatBodyRef} className="chat-body">
+            <div className="message bot-message">
+              <Chatboticon />
+              <p className="message-text">
+                Hey there 🖐️ <br />How can I help you ?
+              </p>
+            </div>
+            {/* Render the chat history dynamically */}
+            {chatHistory.map((chat, index) => (
+              <ChatMessage key={index} chat={chat} />
+            ))}
+
+
           </div>
-          {/* Render the chat history dynamically */}
-          {chatHistory.map((chat, index) => (
-            <ChatMessage key={index} chat={chat} />
-          ))}
-
-
-        </div>
-        {/* Chat footer  */}
-        <div className="chat-footer">
-          <Chatform chatHistory={chatHistory} setChatHistory={setChatHistory} generateBotResponse={generateBotResponse} />
+          {/* Chat footer  */}
+          <div className="chat-footer">
+            <Chatform chatHistory={chatHistory} setChatHistory={setChatHistory} generateBotResponse={generateBotResponse} />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 

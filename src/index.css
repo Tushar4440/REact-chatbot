@@ -77,6 +77,16 @@ body {
     justify-content: space-between;
 }
 
+.main-header1{
+    margin: 200px 65px;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    font-size: 40px;
+    color: #2e1010;
+    font-weight: 600;
+}
+
 .chat-header .header-info {
     display: flex;
     gap: 10px;
